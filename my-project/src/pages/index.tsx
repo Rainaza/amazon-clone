@@ -4,13 +4,16 @@ import { Header } from '@/components/Header'
 import { ProductFeed } from '@/components/ProductFeed'
 import { Products } from '@/types/types'
 import Head from 'next/head'
+import useHasMounted from '@/hooks/useHasMounted'
+
 
 interface Props{
   products:Products[]
 }
 
 export default function Home({products}:Props) {
-  console.log(products)
+  const hasMounted = useHasMounted()
+
   return (
    <div className='bg-gray-100'>
     <Head>
@@ -18,10 +21,13 @@ export default function Home({products}:Props) {
     </Head>
     <Header/>
     <main className='max-w-screen-2xl mx-auto'>
-      {/* BANNER */}
+     {hasMounted&& (
+      <>
       <Banner/> 
-      {/* PRODUCTFEED */}
       <ProductFeed products={products}/>
+      </>
+     )
+     }
     </main>
    </div>
   )

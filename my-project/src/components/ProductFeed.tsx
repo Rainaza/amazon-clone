@@ -6,9 +6,9 @@ interface Props {
 }
 export const ProductFeed = ({ products }: Props) => {
   return (
-    <div>
+    <div className="grid grdi-flow-row-dense md:grid-cols-2">
       {products.map((product) => {
-        return <Product key={product.id} product={product}/>
+        return <Product key={product.id} product={product} />;
       })}
     </div>
   );
