@@ -13,7 +13,6 @@ interface Props{
 
 export default function Home({products}:Props) {
   const hasMounted = useHasMounted()
-
   return (
    <div className='bg-gray-100'>
     <Head>

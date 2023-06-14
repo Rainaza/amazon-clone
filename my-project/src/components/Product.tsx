@@ -15,7 +15,7 @@ export const Product = ({ product }: Props) => {
   );
   const [hasPrime] = useState(Math.random() < 0.5);
   return (
-    <div className="relative flex flex-col m-5 bg-white z-30 p-10 items-center   ">
+    <div className="relative flex flex-col m-5  bg-white z-30 p-10 items-center   ">
       <p className="absolute top-2 right-2 italic text-xs text-grey-400">
         {product.category}
       </p>
@@ -47,7 +47,8 @@ export const Product = ({ product }: Props) => {
             <Image src={primeImage} alt="" width={80} height={80} />
             <p className="text-xs italic">FREE Next-day Delivery</p>
           </div>
-        )}
+        )
+      }
         <div className=" mt-5">
           <button className="button">Add to basket</button>
         </div>

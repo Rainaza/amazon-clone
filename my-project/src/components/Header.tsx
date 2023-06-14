@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Search } from "./Search";
 import ListBulletIcon from "@heroicons/react/24/solid/ListBulletIcon";
 import ShoppingCartIcon from "@heroicons/react/24/outline/ShoppingCartIcon";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/router";
 export const Header = () => {
+  const session= useSession()
+  const router = useRouter()
+ console.log(session)
   return (
     <header>
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2 space-x-2">
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
+            onClick={()=>router.push('/')}
             src="https://links.papareact.com/f90"
             alt="header-image"
             width={150}
@@ -20,15 +26,15 @@ export const Header = () => {
         <Search />
 
         <div className="text-white flex items-center text-xs space-x-6 px-4 whitespace-nowrap">
-          <div className="cursor-pointer link">
-            <p>Hello Indor</p>
+          <div onClick={session.status==="unauthenticated"?signIn:signOut} className="cursor-pointer link">
+            <p>{ ` ${session?.data?.user!==undefined?"Hello, " + session.data?.user?.email:"Log in"}`}</p>
             <p className="font-extrabold md:text-sm">Account & Lists</p>
           </div>
           <div className="cursor-pointer link">
             <p>Returns</p>
             <p className="font-extrabold md:text-sm">& Orders</p>
           </div>
-          <div className="cursor-pointer link flex items-center md:gap-2 w-8 md:w-full relative">
+          <div className="cursor-pointer link flex items-center md:gap-2 w-8 md:w-full relative" onClick={()=>router.push("/checkout")}>
             <span className="absolute top-0 right-0 md:right-10 h-4 w-4 text-center rounded-full text-black bg-yellow-400">
               4
             </span>
