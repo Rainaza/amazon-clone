@@ -5,10 +5,13 @@ import ListBulletIcon from "@heroicons/react/24/solid/ListBulletIcon";
 import ShoppingCartIcon from "@heroicons/react/24/outline/ShoppingCartIcon";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectItems } from "@/slices/basketSlice";
 export const Header = () => {
   const session= useSession()
   const router = useRouter()
- console.log(session)
+  const products =useSelector(selectItems)
+  console.log(products)
   return (
     <header>
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2 space-x-2">
@@ -36,7 +39,7 @@ export const Header = () => {
           </div>
           <div className="cursor-pointer link flex items-center md:gap-2 w-8 md:w-full relative" onClick={()=>router.push("/checkout")}>
             <span className="absolute top-0 right-0 md:right-10 h-4 w-4 text-center rounded-full text-black bg-yellow-400">
-              4
+              {products.length}
             </span>
 
             <ShoppingCartIcon className="w-6 h-9" />

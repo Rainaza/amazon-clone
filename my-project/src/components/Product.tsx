@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useState } from "react";
 import primeImage from "./../assets/images/5f7f75fa3dd424000436e50e.png";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "@/slices/basketSlice";
 interface Props {
   product: Products;
 }
@@ -14,6 +16,12 @@ export const Product = ({ product }: Props) => {
     Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1) + MIN_RATING)
   );
   const [hasPrime] = useState(Math.random() < 0.5);
+  const dispach = useDispatch()
+  const addItemtoBasket = ()=>{
+    const value = product
+    // Sending the product as an action to the REDUX store.. the basket slice
+    dispach(addToBasket(value))
+  }
   return (
     <div className="relative flex flex-col m-5  bg-white z-30 p-10 items-center   ">
       <p className="absolute top-2 right-2 italic text-xs text-grey-400">
@@ -50,7 +58,7 @@ export const Product = ({ product }: Props) => {
         )
       }
         <div className=" mt-5">
-          <button className="button">Add to basket</button>
+          <button onClick={addItemtoBasket} className="button">Add to basket</button>
         </div>
       </div>
     </div>
