@@ -29,7 +29,7 @@ export const Header = () => {
         <Search />
 
         <div className="text-white flex items-center text-xs space-x-6 px-4 whitespace-nowrap">
-          <div onClick={session.status==="unauthenticated"?signIn:signOut} className="cursor-pointer link">
+          <div onClick={()=>session.status==="unauthenticated"?signIn:signOut} className="cursor-pointer link">
             <p>{ ` ${session?.data?.user!==undefined?"Hello, " + session.data?.user?.email:"Log in"}`}</p>
             <p className="font-extrabold md:text-sm">Account & Lists</p>
           </div>
@@ -57,7 +57,7 @@ export const Header = () => {
         </div>
         <p className="link">Prime Video</p>
         <p className="link">Amazon Business</p>
-        <p className="link">Today's Deals</p>
+        <p className="link">Todays Deals</p>
         <p className="link hidden lg:inline-flex">Elektronics</p>
         <p className="link hidden lg:inline-flex">Food & Grocery</p>
         <p className="link hidden lg:inline-flex">Prime</p>
