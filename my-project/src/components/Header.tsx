@@ -30,7 +30,7 @@ export const Header = () => {
 
         <div className="text-white flex items-center text-xs space-x-6 px-4 whitespace-nowrap">
           <div
-            onClick={() =>
+            onClick={
               session.status === "unauthenticated" ? signIn : signOut
             }
             className="cursor-pointer link"
