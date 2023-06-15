@@ -11,7 +11,7 @@ export const Header = () => {
   const session= useSession()
   const router = useRouter()
   const products =useSelector(selectItems)
-  console.log(products)
+  
   return (
     <header>
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2 space-x-2">

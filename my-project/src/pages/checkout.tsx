@@ -1,15 +1,18 @@
 import { ChekoutProduct } from "@/components/ChekoutProduct";
 import { Header } from "@/components/Header";
-import { selectItems } from "@/slices/basketSlice";
+import { selectItems, selectTotal } from "@/slices/basketSlice";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 
 
 
 function Checkout() {
-
+  const session = useSession()
   const items = useSelector(selectItems)
 
+  const total = useSelector(selectTotal)
+  
   return (
     <div className="bg-gray-100">
       <Header />
@@ -24,15 +27,23 @@ function Checkout() {
             alt="banner"
           />
 
-          <div className="flex flex-col p-5 space-y-10 bg-white mt-5" >
+          <div className="flex flex-col p-5 space-y-10 bg-white mt-5 " >
             <h1 className="text-2xl md:text-3xl border-b pb-4">{items.length===0?'Your Amazon Basket is Empty':'Your Shopping Basket'}</h1>
-           {items.map(item=>(
-              <ChekoutProduct key={item.id} item={item} />
+           {items.map((item,index)=>(
+              <ChekoutProduct key={index} index={index} item={item} />
            ))}
           </div>
         </div>
 
         {/* RIGHT */}
+        {items.length>0 &&
+        <div className="flex flex-col p-10  m-5 space-y-4 text-center  bg-white lg:w-[600px]">
+          <h2 className="text-sm">Subtotal  ({items.length} products)  <span className="font-semibold">{Math.floor(total)}$</span></h2>
+        <button className={`button ${session.status==="unauthenticated"&& "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed" }`} disabled={session.status==="unauthenticated"}>
+          {session.status==="unauthenticated"?"Sign in to checkout":"Proceed to chekout"}
+        </button>
+        </div>
+        }
       </main>
     </div>
   );
