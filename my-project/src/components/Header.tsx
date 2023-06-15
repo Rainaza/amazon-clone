@@ -13,6 +13,14 @@ export const Header = () => {
   const router = useRouter();
   const products = useSelector(selectItems);
 
+  const handleSignupSignIn = () =>{
+    if(session.status==="unauthenticated"){
+      signIn()
+    }else{
+      signOut()
+    }
+  }
+
   return (
     <header>
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2 space-x-2">
@@ -31,7 +39,7 @@ export const Header = () => {
         <div className="text-white flex items-center text-xs space-x-6 px-4 whitespace-nowrap">
           <div
             onClick={
-              session.status === "unauthenticated" ? signIn : signOut
+              handleSignupSignIn
             }
             className="cursor-pointer link"
           >
