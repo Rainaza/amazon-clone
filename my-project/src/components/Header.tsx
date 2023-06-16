@@ -13,7 +13,7 @@ export const Header = () => {
   const router = useRouter();
   const products = useSelector(selectItems);
 
-  const handleSignupSignIn = () =>{
+  const handleSignupSignIn = async () =>{
     if(session.status==="unauthenticated"){
       signIn()
     }else{
