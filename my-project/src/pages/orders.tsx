@@ -1,7 +1,8 @@
 import { Header } from "@/components/Header"
 import { useSession,getSession } from "next-auth/react"
-
-
+import {db} from "./../../firebase"
+import moment from "moment"
+import { resolve } from "path"
 const Orders = ({orders}:any) => {
     const session = useSession()
   return (
@@ -24,18 +25,36 @@ export default Orders
 
 
 
-export async function getServerSideProps(context:any){
+export async function getServerSideProps(){
     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-
+    const session = getSession()
     // Get the users logged in credentials..
+// const userSession =session.then((res)=>)
+// console.log(userSession)
+ 
+    // const stripeOrders = await db.collection('users').doc(session.user.email).collection('orders').orderBy("timestamp",'desc').get()
 
-    const session = getSession(context)
-    if(!session){
+    // const orders = await Promise.all(
+    //     stripeOrders.docs.map(async (order:any)=>({
+    //         id:order.id,
+    //         amount:order.data(),
+    //         amountShipping: order.data().amount_shipping,
+    //         images:order.data().images,
+    //         timestamp: moment(order.data.timestamp.toDate().unix()),
+    //         items:(
+    //             await stripe.checkout.sessions.listLineitems(order.id,{
+    //                 limit:100
+    //             })
+    //         ).data
+    //     }))
+    // )
+
         return{
             props:{
-
+                orders:"xd"
             }
-        }
+        } 
+    
  
-    }
+  
 }
